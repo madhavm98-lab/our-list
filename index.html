@@ -12,286 +12,72 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #faf8f4;
-      --surface: #ffffff;
-      --ink: #1a1a18;
-      --ink-light: #6b6860;
-      --accent: #c8563a;
-      --accent-soft: #f5ede9;
-      --border: #e8e4de;
-      --check: #4a9b6f;
-      --check-soft: #e8f4ee;
-      --radius: 14px;
+      --bg: #faf8f4; --surface: #ffffff; --ink: #1a1a18; --ink-light: #6b6860;
+      --accent: #c8563a; --accent-soft: #f5ede9; --border: #e8e4de;
+      --check: #4a9b6f; --check-soft: #e8f4ee; --radius: 14px;
       --shadow: 0 2px 16px rgba(0,0,0,0.07);
     }
-
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      font-family: 'DM Sans', sans-serif;
-      color: var(--ink);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100dvh;
-      padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0);
-    }
-
-    .app {
-      width: 100%;
-      max-width: 480px;
-      padding: 40px 20px 100px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      flex: 1;
-    }
-
-    header {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .title {
-      font-family: 'Lora', serif;
-      font-size: 32px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-    }
-
-    .title em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .subtitle {
-      font-size: 13px;
-      color: var(--ink-light);
-      font-weight: 300;
-    }
-
-    /* Input area */
-    .input-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 10px 10px 10px 16px;
-      box-shadow: var(--shadow);
-      transition: border-color 0.15s;
-    }
-
-    .input-row:focus-within {
-      border-color: var(--accent);
-    }
-
-    .input-row input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--ink);
-      background: transparent;
-    }
-
-    .input-row input::placeholder {
-      color: #b8b4ae;
-    }
-
-    .add-btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 9px;
-      width: 38px;
-      height: 38px;
-      font-size: 22px;
-      line-height: 1;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.12s, opacity 0.12s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    html, body { height: 100%; background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    body { display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0); }
+    .app { width: 100%; max-width: 480px; padding: 40px 20px 100px; display: flex; flex-direction: column; gap: 28px; flex: 1; }
+    header { display: flex; flex-direction: column; gap: 4px; }
+    .title { font-family: 'Lora', serif; font-size: 32px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.1; }
+    .title em { font-style: italic; color: var(--accent); }
+    .subtitle { font-size: 13px; color: var(--ink-light); font-weight: 300; }
+    .input-row { display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 10px 10px 10px 16px; box-shadow: var(--shadow); transition: border-color 0.15s; }
+    .input-row:focus-within { border-color: var(--accent); }
+    .input-row input { flex: 1; border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: 16px; color: var(--ink); background: transparent; }
+    .input-row input::placeholder { color: #b8b4ae; }
+    .add-btn { background: var(--accent); color: white; border: none; border-radius: 9px; width: 38px; height: 38px; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.12s, opacity 0.12s; -webkit-tap-highlight-color: transparent; }
     .add-btn:active { transform: scale(0.92); opacity: 0.85; }
-
-    /* List */
-    .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-    }
-
-    .list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px 14px 14px 16px;
-      box-shadow: var(--shadow);
-      animation: slideIn 0.2s ease;
-      transition: opacity 0.2s, border-color 0.2s, background 0.2s;
-    }
-
-    .item.done {
-      background: var(--check-soft);
-      border-color: #c5e2d0;
-      opacity: 0.7;
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .check-btn {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.15s, border-color 0.15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .item.done .check-btn {
-      background: var(--check);
-      border-color: var(--check);
-    }
-
-    .check-icon {
-      width: 12px;
-      height: 12px;
-      fill: none;
-      stroke: white;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: 0;
-      transition: opacity 0.15s;
-    }
-
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
+    .list { display: flex; flex-direction: column; gap: 8px; }
+    .item { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 14px 14px 14px 16px; box-shadow: var(--shadow); animation: slideIn 0.2s ease; transition: opacity 0.2s, border-color 0.2s, background 0.2s; }
+    .item.done { background: var(--check-soft); border-color: #c5e2d0; opacity: 0.7; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+    .check-btn { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s, border-color 0.15s; -webkit-tap-highlight-color: transparent; }
+    .item.done .check-btn { background: var(--check); border-color: var(--check); }
+    .check-icon { width: 12px; height: 12px; fill: none; stroke: white; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: opacity 0.15s; }
     .item.done .check-icon { opacity: 1; }
-
-    .item-name {
-      flex: 1;
-      font-size: 16px;
-      font-weight: 400;
-      transition: color 0.15s, text-decoration 0.15s;
-    }
-
-    .item.done .item-name {
-      text-decoration: line-through;
-      color: var(--ink-light);
-    }
-
-    .del-btn {
-      width: 28px;
-      height: 28px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 6px;
-      opacity: 0.35;
-      transition: opacity 0.12s, background 0.12s;
-      -webkit-tap-highlight-color: transparent;
-      flex-shrink: 0;
-    }
-
+    .item-name { flex: 1; font-size: 16px; transition: color 0.15s; }
+    .item.done .item-name { text-decoration: line-through; color: var(--ink-light); }
+    .del-btn { width: 28px; height: 28px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 6px; opacity: 0.35; transition: opacity 0.12s, background 0.12s; -webkit-tap-highlight-color: transparent; flex-shrink: 0; }
     .del-btn:hover, .del-btn:active { opacity: 1; background: #fde8e4; }
-
-    .empty {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--ink-light);
-      font-size: 15px;
-      font-family: 'Lora', serif;
-      font-style: italic;
-    }
-
+    .empty { text-align: center; padding: 40px 20px; color: var(--ink-light); font-size: 15px; font-family: 'Lora', serif; font-style: italic; }
     .empty span { display: block; font-size: 32px; margin-bottom: 10px; }
+    .clear-btn { align-self: center; background: none; border: 1.5px solid var(--border); border-radius: 20px; padding: 8px 18px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink-light); cursor: pointer; transition: border-color 0.12s, color 0.12s, background 0.12s; -webkit-tap-highlight-color: transparent; }
+    .clear-btn:hover, .clear-btn:active { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+    .sync-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-light); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
+    .dot.live { background: var(--check); animation: pulse 2s infinite; }
+    .dot.error { background: var(--accent); }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-    /* Clear done items button */
-    .clear-btn {
-      align-self: center;
-      background: none;
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 8px 18px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: var(--ink-light);
-      cursor: pointer;
-      transition: border-color 0.12s, color 0.12s, background 0.12s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .clear-btn:hover, .clear-btn:active {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-soft);
-    }
-
-    .sync-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--check);
-      display: inline-block;
-      margin-left: 6px;
-      vertical-align: middle;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
+    /* Setup banner */
+    .setup-banner { background: #fff8e6; border: 1.5px solid #f0d080; border-radius: var(--radius); padding: 16px; font-size: 14px; line-height: 1.6; color: #5a4a00; }
+    .setup-banner strong { display: block; margin-bottom: 4px; font-size: 15px; }
+    .setup-banner code { background: #f0e8c0; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
   </style>
 </head>
 <body>
 <div class="app">
   <header>
-    <h1 class="title">Our <em>List</em> <span class="sync-dot" title="Synced"></span></h1>
-    <p class="subtitle">Shared between the two of you</p>
+    <h1 class="title">Our <em>List</em></h1>
+    <div class="sync-status">
+      <div class="dot" id="dot"></div>
+      <span id="syncLabel">Connecting…</span>
+    </div>
   </header>
+
+  <div id="setupBanner" class="setup-banner" style="display:none">
+    <strong>⚠️ Firebase not configured yet</strong>
+    Open this file in a text editor and replace the Firebase config at the top of the &lt;script&gt; with your own. See the instructions below the code.
+  </div>
 
   <div class="input-row">
     <input type="text" id="itemInput" placeholder="Add something…" autocomplete="off" autocorrect="on" />
-    <button class="add-btn" onclick="addItem()" aria-label="Add item">
+    <button class="add-btn" onclick="addItem()" aria-label="Add">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M8 2v12M2 8h12" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
       </svg>
@@ -299,7 +85,7 @@
   </div>
 
   <div>
-    <p class="section-label" id="listLabel">To get</p>
+    <p class="section-label" id="listLabel">Items</p>
     <div class="list" id="itemList"></div>
   </div>
 
@@ -308,29 +94,84 @@
   </button>
 </div>
 
-<script>
-  const STORAGE_KEY = 'shopping-list-items';
-  let items = [];
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, onValue, set, remove, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-  async function load() {
-    try {
-      const result = await window.storage.get(STORAGE_KEY, true);
-      items = result ? JSON.parse(result.value) : [];
-    } catch {
-      items = [];
-    }
-    render();
+  // ─────────────────────────────────────────────
+  // 🔧 PASTE YOUR FIREBASE CONFIG HERE
+  // ─────────────────────────────────────────────
+  const firebaseConfig = {
+    apiKey: "AIzaSyC2cAsLe6J4HkUpq-PdkQVx-VzRQOf72Aw",
+    authDomain: "our-list-10eb0.firebaseapp.com",
+    databaseURL: "https://our-list-10eb0-default-rtdb.firebaseio.com",
+    projectId: "our-list-10eb0",
+    storageBucket: "our-list-10eb0.firebasestorage.app",
+    messagingSenderId: "433098385607",
+    appId: "1:433098385607:web:36edb73e43392e6bbdb6e2",
+    measurementId: "G-0RC16P8SZF"
+  };
+  // ─────────────────────────────────────────────
+
+  const isConfigured = !firebaseConfig.apiKey.includes("PASTE");
+
+  if (!isConfigured) {
+    document.getElementById('setupBanner').style.display = 'block';
+    document.getElementById('syncLabel').textContent = 'Not connected';
+    document.getElementById('dot').classList.add('error');
+  } else {
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const listRef = ref(db, 'shoppingList');
+
+    // Listen for real-time changes
+    onValue(listRef, (snapshot) => {
+      const data = snapshot.val() || {};
+      const items = Object.entries(data).map(([id, val]) => ({ id, ...val }));
+      // Sort: pending first, then done; within each group newest first
+      items.sort((a, b) => (a.done - b.done) || (b.ts - a.ts));
+      render(items);
+      document.getElementById('dot').className = 'dot live';
+      document.getElementById('syncLabel').textContent = 'Live';
+    }, (err) => {
+      document.getElementById('dot').className = 'dot error';
+      document.getElementById('syncLabel').textContent = 'Connection error';
+    });
+
+    window.addItem = async function() {
+      const input = document.getElementById('itemInput');
+      const name = input.value.trim();
+      if (!name) return;
+      const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+      await set(ref(db, 'shoppingList/' + id), { name, done: false, ts: Date.now() });
+      input.value = '';
+    };
+
+    window.toggleItem = async function(id, currentDone) {
+      await update(ref(db, 'shoppingList/' + id), { done: !currentDone });
+    };
+
+    window.removeItem = async function(id) {
+      await remove(ref(db, 'shoppingList/' + id));
+    };
+
+    window.clearDone = async function() {
+      // Get current snapshot and remove done items
+      onValue(listRef, async (snapshot) => {
+        const data = snapshot.val() || {};
+        for (const [id, val] of Object.entries(data)) {
+          if (val.done) await remove(ref(db, 'shoppingList/' + id));
+        }
+      }, { onlyOnce: true });
+    };
   }
 
-  async function save() {
-    try {
-      await window.storage.set(STORAGE_KEY, JSON.stringify(items), true);
-    } catch(e) {
-      console.error('Save failed', e);
-    }
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
-  function render() {
+  function render(items) {
     const list = document.getElementById('itemList');
     const clearBtn = document.getElementById('clearBtn');
     const label = document.getElementById('listLabel');
@@ -349,18 +190,17 @@
     }
 
     list.innerHTML = '';
-    // Pending first, then done
-    [...pending, ...done].forEach(item => {
+    items.forEach(item => {
       const el = document.createElement('div');
       el.className = 'item' + (item.done ? ' done' : '');
       el.innerHTML = `
-        <button class="check-btn" onclick="toggle('${item.id}')" aria-label="Toggle">
+        <button class="check-btn" onclick="toggleItem('${item.id}', ${item.done})">
           <svg class="check-icon" viewBox="0 0 12 10">
             <polyline points="1.5,5 4.5,8.5 10.5,1.5"/>
           </svg>
         </button>
         <span class="item-name">${escHtml(item.name)}</span>
-        <button class="del-btn" onclick="remove('${item.id}')" aria-label="Delete">
+        <button class="del-btn" onclick="removeItem('${item.id}')">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
@@ -370,46 +210,9 @@
     });
   }
 
-  function escHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  async function addItem() {
-    const input = document.getElementById('itemInput');
-    const name = input.value.trim();
-    if (!name) return;
-    items.unshift({ id: Date.now().toString(36) + Math.random().toString(36).slice(2), name, done: false });
-    input.value = '';
-    await save();
-    render();
-  }
-
-  async function toggle(id) {
-    const item = items.find(i => i.id === id);
-    if (item) { item.done = !item.done; await save(); render(); }
-  }
-
-  async function remove(id) {
-    items = items.filter(i => i.id !== id);
-    await save();
-    render();
-  }
-
-  async function clearDone() {
-    items = items.filter(i => !i.done);
-    await save();
-    render();
-  }
-
-  // Enter key support
   document.getElementById('itemInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') addItem();
+    if (e.key === 'Enter') window.addItem && window.addItem();
   });
-
-  // Poll for changes every 5 seconds (so partner's additions show up)
-  setInterval(load, 5000);
-
-  load();
 </script>
 </body>
 </html>
