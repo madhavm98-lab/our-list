@@ -389,7 +389,14 @@
       titleWord.textContent = 'Tasks';
       titleWord.className = 'tasks-color';
     }
+
+    // Persist active tab across refreshes
+    localStorage.setItem('ourapp_active_tab', tab);
   }
+
+  // Restore last active tab on load
+  const savedTab = localStorage.getItem('ourapp_active_tab');
+  if (savedTab === 'tasks') switchTab('tasks');
 </script>
 </body>
 </html>
